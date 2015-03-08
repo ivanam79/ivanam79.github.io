@@ -26,21 +26,32 @@
 
 function accessorsTest() {
     var a1 = $v.value();
-    if((typeof a1()) != "undefined") alert("1. Default accessor value is not undefined");
-    
+    if ((typeof a1()) != "undefined")
+        alert("1. Default accessor value is not undefined");
+
     var a2 = $v.value("asd");
-    if(a2() != "asd") alert("2. Unexpected accessor value after creation");
+    if (a2() != "asd")
+        alert("2. Unexpected accessor value after creation");
     a2("dfg");
-    if(a2() != "dfg") alert("2.1. Failed setting accessor value");
+    if (a2() != "dfg")
+        alert("2.1. Failed setting accessor value");
     var change1Captured = false;
-    a2.listen(function() { change1Captured = true; });
-    if(a2.listeners.length != 1) alert("2.1. Failed registering listener");
+    a2.listen(function () {
+        change1Captured = true;
+    });
+    if (a2.listeners.length != 1)
+        alert("2.1. Failed registering listener");
     var change2Captured = false;
-    a2.listen(function() { change2Captured = true; });
-    if(a2.listeners.length != 2) alert("2.1. Failed registering second listener");
+    a2.listen(function () {
+        change2Captured = true;
+    });
+    if (a2.listeners.length != 2)
+        alert("2.1. Failed registering second listener");
     a2("sde");
-    if(!change1Captured) alert("Listener didn't execute");
-    if(!change2Captured) alert("Second listener didn't execute");
+    if (!change1Captured)
+        alert("Listener didn't execute");
+    if (!change2Captured)
+        alert("Second listener didn't execute");
 }
 
 accessorsTest();

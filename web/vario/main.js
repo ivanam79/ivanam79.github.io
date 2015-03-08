@@ -24,6 +24,6 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-$v={
+$v = {
     version: "1.0a"
 };

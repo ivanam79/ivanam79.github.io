@@ -37,8 +37,8 @@ $v.value = function (initialValue) {
             return ret.currentValue;
         } else {
             // Invoke listeners
-            for(var i=0;i<ret.listeners.length;i++) {
-                if(!ret.listeners[i]($v.VALUE_CHANGED, arguments[0], ret.currentValue)) {
+            for (var i = 0; i < ret.listeners.length; i++) {
+                if (!ret.listeners[i]($v.VALUE_CHANGED, arguments[0], ret.currentValue)) {
                     // Updating value is canceled
                     return;
                 }
@@ -47,7 +47,7 @@ $v.value = function (initialValue) {
             ret.currentValue = arguments[0];
         }
     };
-    ret.listen = function(f) {
+    ret.listen = function (f) {
         ret.listeners.push(f);
     };
     ret.listeners = [];
@@ -58,17 +58,17 @@ $v.value = function (initialValue) {
 
 $v.array = function (initialValue) {
     var ret = $v.value(initialValue);
-    ret.add = function(item) {
+    ret.add = function (item) {
         // TODO
     };
-    
-    ret.insert = function(index, item) {
+
+    ret.insert = function (index, item) {
         // TODO
     };
-    
+
     return ret;
 };
 
-$v.hashMap = function(initialValue) {
+$v.hashMap = function (initialValue) {
     // TODO
 };
