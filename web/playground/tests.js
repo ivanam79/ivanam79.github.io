@@ -52,6 +52,7 @@ function accessorsTest() {
         alert("Listener didn't execute");
     if (!change2Captured)
         alert("Second listener didn't execute");
+
 }
 
 accessorsTest();

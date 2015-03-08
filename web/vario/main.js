@@ -24,6 +24,22 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * Main Vario class
+ * 
+ * @class $v
+ * @static
+ * @module Vario
+ */
 $v = {
-    version: "1.0a"
+    /**
+     * API Version
+     * 
+     * @property VERSION
+     * @public 
+     * @static
+     * @final
+     * @type String
+     */
+    VERSION: "1.0a"
 };
