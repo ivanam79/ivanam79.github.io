@@ -40,7 +40,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "accessors.js",
-            "line": 198,
+            "line": 201,
             "description": "Main Vario class"
         }
     },
@@ -96,7 +96,7 @@
             "extension_for": [],
             "module": "Vario",
             "file": "accessors.js",
-            "line": 198,
+            "line": 201,
             "description": "Implementation of the ArrayAccessor class",
             "extends": "$v.Accessor"
         }
@@ -249,7 +249,7 @@
         },
         {
             "file": "accessors.js",
-            "line": 174,
+            "line": 177,
             "description": "Creates an array, which can be monitored for changes",
             "example": [
                 "\n     var arr = $v.array([]); // creates an empty array\n     arr.add(1);\n     arr.add(\"b\");\n     console.log(arr());     // outputs [1, \"b\"]\n     \n     arr.insert(\"a\", 1);     // inserts \"a\" at position 1\n     arr.remove(2);          // removes the item at position 2\n     console.log(arr());     // outputs [1, \"a\"]\n     \n     arr(0, \"b\");            // updates element at index 0\n     console.log(arr(0));    // retrieves item at index 0 - \"b\"\n     console.log(arr());     // outputs [\"b\", \"a\"]"
@@ -275,7 +275,19 @@
         },
         {
             "file": "accessors.js",
-            "line": 207,
+            "line": 236,
+            "description": "Returns items count",
+            "itemtype": "method",
+            "name": "count",
+            "return": {
+                "description": "",
+                "type": "Int"
+            },
+            "class": "$v.ArrayAccessor"
+        },
+        {
+            "file": "accessors.js",
+            "line": 246,
             "description": "Appends a new item",
             "itemtype": "method",
             "name": "add",
@@ -290,7 +302,7 @@
         },
         {
             "file": "accessors.js",
-            "line": 217,
+            "line": 263,
             "description": "Inserts new item at specified position",
             "itemtype": "method",
             "name": "insert",
@@ -310,7 +322,7 @@
         },
         {
             "file": "accessors.js",
-            "line": 228,
+            "line": 274,
             "description": "Removes item at specified position",
             "itemtype": "method",
             "name": "remove",
@@ -325,7 +337,7 @@
         },
         {
             "file": "accessors.js",
-            "line": 241,
+            "line": 287,
             "description": "Creates a hash map, which can be monitored for changes",
             "example": [
                 "\n     var hm = $v.array({}); // creates an empty hash map\n     hm(\"key1\", \"value1\");  // inserts or updates new item\n     hm(\"key2\", \"value2\");\n     \n     console.log(hm(\"key1\")); // outputs \"value 1\"\n     console.log(hm());       // outputs {key1: value1, key2: value2}\n     \n     hm.remove(\"key1\");       // removes item"
@@ -375,11 +387,15 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " accessors.js:174"
+            "line": " accessors.js:177"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " accessors.js:241"
+            "line": " accessors.js:236"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " accessors.js:287"
         }
     ]
 }
