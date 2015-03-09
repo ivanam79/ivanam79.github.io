@@ -243,7 +243,7 @@ $v.value = function (initialValue) {
         } else if (arguments.length == 1) {
             // Invoke listeners
             for (var i = 0; i &lt; valueAccessor.listeners.length; i++) {
-                if (!valueAccessor.listeners[i](arguments[0], valueAccessor.currentValue, $v.VALUE_CHANGED)) {
+                if (valueAccessor.listeners[i](arguments[0], valueAccessor.currentValue, $v.VALUE_CHANGED) === false) {
                     // Updating value is canceled
                     return;
                 }
@@ -252,7 +252,6 @@ $v.value = function (initialValue) {
             valueAccessor.currentValue = arguments[0];
         } else {
             throw &quot;$v.ValueAccessor() requires 0 or 1 arguments&quot;;
-        }
         }
     });
 
@@ -305,7 +304,7 @@ $v.array = function (initialValue) {
             } else {
                 // Invoke listeners
                 for (var i = 0; i &lt; arrayAccessor.listeners.length; i++) {
-                    if (!arrayAccessor.listeners[i](arguments[1], arrayAccessor.currentValue[arguments[1]], $v.VALUE_CHANGED, arguments[0])) {
+                    if (arrayAccessor.listeners[i](arguments[1], arrayAccessor.currentValue[arguments[0]], $v.COLLECTION_ITEM_CHANGED, arguments[0]) === false) {
                         // Updating value is canceled
                         return;
                     }
@@ -322,7 +321,7 @@ $v.array = function (initialValue) {
      * Returns items count
      * 
      * @method count
-     * @returns {int}
+     * @returns {int} items count
      */
     arrayAccessor.count = function () {
         return arrayAccessor.currentValue.length;
@@ -337,7 +336,7 @@ $v.array = function (initialValue) {
     arrayAccessor.add = function (item) {
         // Invoke listeners
         for (var i = 0; i &lt; arrayAccessor.listeners.length; i++) {
-            if (!arrayAccessor.listeners[i](item, null, $v.COLLECTION_ITEM_ADDED, arrayAccessor.currentValue.length)) {
+            if (arrayAccessor.listeners[i](item, null, $v.COLLECTION_ITEM_ADDED, arrayAccessor.currentValue.length) === false) {
                 // Updating value is canceled
                 return;
             }
@@ -349,11 +348,18 @@ $v.array = function (initialValue) {
      * Inserts new item at specified position
      * 
      * @method insert
-     * @param {Mixed} item
      * @param {int} index
+     * @param {Mixed} item
      */
-    arrayAccessor.insert = function (item, index) {
-        // TODO
+    arrayAccessor.insert = function (index, item) {
+        // Invoke listeners
+        for (var i = 0; i &lt; arrayAccessor.listeners.length; i++) {
+            if (arrayAccessor.listeners[i](item, null, $v.COLLECTION_ITEM_ADDED, index) === false) {
+                // Updating value is canceled
+                return;
+            }
+        }
+        arrayAccessor.currentValue.splice(index, 0, item);
     };
 
     /**
@@ -363,7 +369,18 @@ $v.array = function (initialValue) {
      * @param {int} index
      */
     arrayAccessor.remove = function (index) {
-        // TODO
+        if((typeof arrayAccessor.currentValue[arguments[0]]) == &quot;undefined&quot;) {
+            throw &quot;Array element &quot; + arguments[0] + &quot; doesn&#x27;t exist&quot;;
+        } else {
+            // Invoke listeners
+            for (var i = 0; i &lt; arrayAccessor.listeners.length; i++) {
+                if (arrayAccessor.listeners[i](null, arrayAccessor.currentValue[index], $v.COLLECTION_ITEM_REMOVED, index) === false) {
+                    // Updating value is canceled
+                    return;
+                }
+            }
+            arrayAccessor.currentValue.splice(index, 1);
+        }                
     };
 
     return arrayAccessor;

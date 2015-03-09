@@ -40,7 +40,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "accessors.js",
-            "line": 201,
+            "line": 200,
             "description": "Main Vario class"
         }
     },
@@ -96,7 +96,7 @@
             "extension_for": [],
             "module": "Vario",
             "file": "accessors.js",
-            "line": 201,
+            "line": 200,
             "description": "Implementation of the ArrayAccessor class",
             "extends": "$v.Accessor"
         }
@@ -249,7 +249,7 @@
         },
         {
             "file": "accessors.js",
-            "line": 177,
+            "line": 176,
             "description": "Creates an array, which can be monitored for changes",
             "example": [
                 "\n     var arr = $v.array([]); // creates an empty array\n     arr.add(1);\n     arr.add(\"b\");\n     console.log(arr());     // outputs [1, \"b\"]\n     \n     arr.insert(\"a\", 1);     // inserts \"a\" at position 1\n     arr.remove(2);          // removes the item at position 2\n     console.log(arr());     // outputs [1, \"a\"]\n     \n     arr(0, \"b\");            // updates element at index 0\n     console.log(arr(0));    // retrieves item at index 0 - \"b\"\n     console.log(arr());     // outputs [\"b\", \"a\"]"
@@ -275,19 +275,19 @@
         },
         {
             "file": "accessors.js",
-            "line": 236,
+            "line": 235,
             "description": "Returns items count",
             "itemtype": "method",
             "name": "count",
             "return": {
-                "description": "",
+                "description": "items count",
                 "type": "Int"
             },
             "class": "$v.ArrayAccessor"
         },
         {
             "file": "accessors.js",
-            "line": 246,
+            "line": 245,
             "description": "Appends a new item",
             "itemtype": "method",
             "name": "add",
@@ -302,27 +302,27 @@
         },
         {
             "file": "accessors.js",
-            "line": 263,
+            "line": 262,
             "description": "Inserts new item at specified position",
             "itemtype": "method",
             "name": "insert",
             "params": [
                 {
-                    "name": "item",
-                    "description": "",
-                    "type": "Mixed"
-                },
-                {
                     "name": "index",
                     "description": "",
                     "type": "Int"
+                },
+                {
+                    "name": "item",
+                    "description": "",
+                    "type": "Mixed"
                 }
             ],
             "class": "$v.ArrayAccessor"
         },
         {
             "file": "accessors.js",
-            "line": 274,
+            "line": 280,
             "description": "Removes item at specified position",
             "itemtype": "method",
             "name": "remove",
@@ -337,7 +337,7 @@
         },
         {
             "file": "accessors.js",
-            "line": 287,
+            "line": 304,
             "description": "Creates a hash map, which can be monitored for changes",
             "example": [
                 "\n     var hm = $v.array({}); // creates an empty hash map\n     hm(\"key1\", \"value1\");  // inserts or updates new item\n     hm(\"key2\", \"value2\");\n     \n     console.log(hm(\"key1\")); // outputs \"value 1\"\n     console.log(hm());       // outputs {key1: value1, key2: value2}\n     \n     hm.remove(\"key1\");       // removes item"
@@ -387,15 +387,15 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " accessors.js:177"
+            "line": " accessors.js:176"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " accessors.js:236"
+            "line": " accessors.js:235"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " accessors.js:287"
+            "line": " accessors.js:304"
         }
     ]
 }
