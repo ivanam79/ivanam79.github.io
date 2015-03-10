@@ -7,7 +7,8 @@
             "classes": {
                 "$v.Accessor": 1,
                 "$v.ValueAccessor": 1,
-                "$v.ArrayAccessor": 1
+                "$v.ArrayAccessor": 1,
+                "$v.HashMapAccessor": 1
             },
             "fors": {
                 "$v": 1
@@ -34,13 +35,14 @@
                 "$v": 1,
                 "$v.Accessor": 1,
                 "$v.ValueAccessor": 1,
-                "$v.ArrayAccessor": 1
+                "$v.ArrayAccessor": 1,
+                "$v.HashMapAccessor": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
             "file": "accessors.js",
-            "line": 200,
+            "line": 324,
             "description": "Main Vario class"
         }
     },
@@ -98,6 +100,20 @@
             "file": "accessors.js",
             "line": 200,
             "description": "Implementation of the ArrayAccessor class",
+            "extends": "$v.Accessor"
+        },
+        "$v.HashMapAccessor": {
+            "name": "$v.HashMapAccessor",
+            "shortname": "$v.HashMapAccessor",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Vario",
+            "file": "accessors.js",
+            "line": 324,
+            "description": "Implementation of the HashMapAccessor class",
             "extends": "$v.Accessor"
         }
     },
@@ -362,6 +378,52 @@
             "class": "$v"
         },
         {
+            "file": "accessors.js",
+            "line": 360,
+            "description": "Checks if hash map contains key",
+            "itemtype": "method",
+            "name": "hasKey",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "",
+                    "type": "Mixed"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Bool"
+            },
+            "class": "$v.HashMapAccessor"
+        },
+        {
+            "file": "accessors.js",
+            "line": 371,
+            "description": "Returns an array of hash map's keys",
+            "itemtype": "method",
+            "name": "getKeys",
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "$v.HashMapAccessor"
+        },
+        {
+            "file": "accessors.js",
+            "line": 381,
+            "description": "Removes hash map item",
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "",
+                    "type": "Mixed"
+                }
+            ],
+            "class": "$v.HashMapAccessor"
+        },
+        {
             "file": "main.js",
             "line": 35,
             "description": "API Version",
@@ -396,6 +458,14 @@
         {
             "message": "replacing incorrect tag: returns with return",
             "line": " accessors.js:304"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " accessors.js:360"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " accessors.js:371"
         }
     ]
 }

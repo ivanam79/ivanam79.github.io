@@ -4,6 +4,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "$v",
         "$v.Accessor",
         "$v.ArrayAccessor",
+        "$v.HashMapAccessor",
         "$v.ValueAccessor"
     ],
     "modules": [

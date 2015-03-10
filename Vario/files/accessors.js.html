@@ -41,6 +41,7 @@
                                 <li><a href="../classes/$v.html">$v</a></li>
                                 <li><a href="../classes/$v.Accessor.html">$v.Accessor</a></li>
                                 <li><a href="../classes/$v.ArrayAccessor.html">$v.ArrayAccessor</a></li>
+                                <li><a href="../classes/$v.HashMapAccessor.html">$v.HashMapAccessor</a></li>
                                 <li><a href="../classes/$v.ValueAccessor.html">$v.ValueAccessor</a></li>
                             </ul>
                 
@@ -288,18 +289,18 @@ $v.array = function (initialValue) {
      * @class $v.ArrayAccessor
      * @extends $v.Accessor
      */
-    if(!initialValue) {
+    if (!initialValue) {
         initialValue = []; // Default empty
     }
     var arrayAccessor = $v.createAccessor(initialValue, function () {
-        if(arguments.length == 1) {
-            if((typeof arrayAccessor.currentValue[arguments[0]]) == &quot;undefined&quot;) {
+        if (arguments.length == 1) {
+            if ((typeof arrayAccessor.currentValue[arguments[0]]) == &quot;undefined&quot;) {
                 throw &quot;Array element &quot; + arguments[0] + &quot; doesn&#x27;t exist&quot;;
             } else {
                 return arrayAccessor.currentValue[arguments[0]];
             }
-        } else if(arguments.length == 2) {
-            if((typeof arrayAccessor.currentValue[arguments[0]]) == &quot;undefined&quot;) {
+        } else if (arguments.length == 2) {
+            if ((typeof arrayAccessor.currentValue[arguments[0]]) == &quot;undefined&quot;) {
                 throw &quot;Array element &quot; + arguments[0] + &quot; doesn&#x27;t exist&quot;;
             } else {
                 // Invoke listeners
@@ -311,12 +312,12 @@ $v.array = function (initialValue) {
                 }
                 // Write value                
                 arrayAccessor.currentValue[arguments[0]] = arguments[1];
-            }            
+            }
         } else {
             throw &quot;$v.ArrayAccessor() requires 1 or 2 arguments&quot;;
         }
     });
-    
+
     /**
      * Returns items count
      * 
@@ -326,7 +327,7 @@ $v.array = function (initialValue) {
     arrayAccessor.count = function () {
         return arrayAccessor.currentValue.length;
     };
-    
+
     /**
      * Appends a new item
      * 
@@ -369,7 +370,7 @@ $v.array = function (initialValue) {
      * @param {int} index
      */
     arrayAccessor.remove = function (index) {
-        if((typeof arrayAccessor.currentValue[arguments[0]]) == &quot;undefined&quot;) {
+        if ((typeof arrayAccessor.currentValue[arguments[0]]) == &quot;undefined&quot;) {
             throw &quot;Array element &quot; + arguments[0] + &quot; doesn&#x27;t exist&quot;;
         } else {
             // Invoke listeners
@@ -380,7 +381,7 @@ $v.array = function (initialValue) {
                 }
             }
             arrayAccessor.currentValue.splice(index, 1);
-        }                
+        }
     };
 
     return arrayAccessor;
@@ -406,7 +407,84 @@ $v.array = function (initialValue) {
  * @for $v
  */
 $v.hashMap = function (initialValue) {
-    // TODO
+    /**
+     * Implementation of the HashMapAccessor class
+     * 
+     * @class $v.HashMapAccessor
+     * @extends $v.Accessor
+     */
+    if (!initialValue) {
+        initialValue = {}; // Default empty
+    }
+    var hashMapAccessor = $v.createAccessor(initialValue, function () {
+        if (arguments.length == 1) {
+            if ((typeof hashMapAccessor.currentValue[arguments[0]]) == &quot;undefined&quot;) {
+                throw &quot;HashMap element &quot; + arguments[0] + &quot; doesn&#x27;t exist&quot;;
+            } else {
+                return hashMapAccessor.currentValue[arguments[0]];
+            }
+        } else if (arguments.length == 2) {
+            // Invoke listeners
+            for (var i = 0; i &lt; hashMapAccessor.listeners.length; i++) {
+                if (hashMapAccessor.listeners[i](
+                    arguments[1],
+                    (hashMapAccessor.hasKey(arguments[0]) ? hashMapAccessor.currentValue[arguments[0]] : null),
+                    (hashMapAccessor.hasKey(arguments[0]) ? $v.COLLECTION_ITEM_CHANGED : $v.COLLECTION_ITEM_ADDED),
+                    arguments[0]
+                ) === false) {
+                    // Updating value is canceled
+                    return;
+                }
+            }
+            // Write value                
+            hashMapAccessor.currentValue[arguments[0]] = arguments[1];
+        } else {
+            throw &quot;$v.HashMapAccessor() requires 1 or 2 arguments&quot;;
+        }
+    });
+
+    /**
+     * Checks if hash map contains key
+     * 
+     * @method hasKey
+     * @param {Mixed} key
+     * @returns {bool}
+     */
+    hashMapAccessor.hasKey = function (key) {
+        return hashMapAccessor.currentValue.hasOwnProperty(key);
+    };
+
+    /**
+     * Returns an array of hash map&#x27;s keys
+     * 
+     * @method getKeys
+     * @returns {Array}
+     */
+    hashMapAccessor.getKeys = function () {
+        return Object.keys(hashMapAccessor.currentValue);
+    };
+
+    /**
+     * Removes hash map item
+     * 
+     * @method remove
+     * @param {Mixed} key
+     */
+    hashMapAccessor.remove = function (key) {
+        if (!hashMapAccessor.hasKey(key)) {
+            throw &quot;HashMap element &quot; + key + &quot; doesn&#x27;t exist&quot;;
+        }
+        // Invoke listeners
+        for (var i = 0; i &lt; hashMapAccessor.listeners.length; i++) {
+            if (hashMapAccessor.listeners[i](null, hashMapAccessor.currentValue[key], $v.COLLECTION_ITEM_REMOVED, key) === false) {
+                // Updating value is canceled
+                return;
+            }
+        }
+        delete hashMapAccessor.currentValue[key];
+    };
+
+    return hashMapAccessor;
 };
 
     </pre>
